@@ -1,3 +1,4 @@
+using DG.Tweening;
 using UnityEngine;
 
 namespace BigTwo
@@ -5,9 +6,9 @@ namespace BigTwo
     public class Card : MonoBehaviour
     {
         [SerializeField]
-        private CardData m_cardData;
+        protected CardData m_cardData;
         [SerializeField]
-        private SpriteRenderer m_spriteRenderer;
+        protected SpriteRenderer m_spriteRenderer;
 
         public CardData CardData
         {
@@ -23,7 +24,7 @@ namespace BigTwo
             Initialize();
         }
 
-        private void OnValidate()
+        protected void OnValidate()
         {
 #if UNITY_EDITOR
             if (!Application.isPlaying)
@@ -38,10 +39,30 @@ namespace BigTwo
             m_spriteRenderer.sprite = CardManager.Instance.GetCardSprite(m_cardData.Rank, m_cardData.Suit);
         }
 
+        public void Initialize(CardData cardData)
+        {
+            m_cardData = cardData;
+            Initialize();
+        }
+
         public bool IsHigherThan(Card otherCard)
         {
             CardData otherCardData = otherCard.CardData;
             return m_cardData.Rank > otherCardData.Rank || (m_cardData.Rank == otherCardData.Rank && m_cardData.Suit > otherCardData.Suit);
+        }
+
+        public void ToggleVisibility(bool isVisible, bool isAnimating = false)
+        {
+            Vector3 targetEulerAngle = transform.localEulerAngles;
+            targetEulerAngle.y = (isVisible ? 0f : 180f);
+            if (isAnimating)
+            {
+                transform.DOLocalRotate(targetEulerAngle, Constant.ANIMATION_DURATION);
+            }
+            else
+            {
+                transform.localEulerAngles = targetEulerAngle;
+            }
         }
     }
 }
