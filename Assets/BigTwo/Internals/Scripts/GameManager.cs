@@ -44,6 +44,8 @@ namespace BigTwo
         protected int m_passCount;
 
         [SerializeField]
+        protected UIGameController uiGameController;
+        [SerializeField]
         protected ObjectPool m_objectPool;
 
         public int PlayerTurnIndex
@@ -249,6 +251,8 @@ namespace BigTwo
             m_passCount = 0;
 
             EventPlayerTurn.Invoke(PlayerTurn);
+
+            uiGameController.ShowTurnIndicator();
         }
 
         public void PassTurn()
@@ -260,6 +264,16 @@ namespace BigTwo
             {
                 NextRound();
             }
+
+            uiGameController.ShowPassIndicator(() =>
+            {
+                ChangeGameState(GameState.TurnTransition);
+                m_turn++;
+
+                EventPlayerTurn.Invoke(PlayerTurn);
+
+                uiGameController.ShowTurnIndicator();
+            });
         }
 
         public void GameEnd()
@@ -283,6 +297,8 @@ namespace BigTwo
                     DistributeCards();
                     break;
                 case GameState.Start:
+                    uiGameController.ShowTurnIndicator();
+
                     EventPlayerTurn.Invoke(PlayerTurn);
                     break;
                 case GameState.End:
