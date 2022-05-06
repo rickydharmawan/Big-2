@@ -7,7 +7,18 @@ namespace BigTwo
     public class Player : MonoBehaviour
     {
         [SerializeField]
+        protected UIAvatar m_uiAvatar;
+
+        [SerializeField]
         protected Hand m_hand;
+
+        public UIAvatar UIAvatar
+        {
+            get
+            {
+                return m_uiAvatar;
+            }
+        }
 
         public Hand Hand
         {
