@@ -4,5 +4,11 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/BigTwo/Internals/Scenes/Main.unity
+    guid: 401865494988eaf4baa357e5038e8de8
+  - enabled: 1
+    path: Assets/BigTwo/Internals/Scenes/Game.unity
+    guid: 633a5249eab83184abe792f0bcd78604
   m_configObjects: {}
