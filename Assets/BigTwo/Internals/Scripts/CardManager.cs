@@ -1,6 +1,4 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace BigTwo
@@ -52,12 +50,12 @@ namespace BigTwo
         [SerializeField]
         private CardSuiteSprite[] m_cardRankSuites;
 
-        private void Awake()
+        private void OnValidate()
         {
             Initialize();
         }
 
-        private void OnValidate()
+        private void Awake()
         {
             Initialize();
         }
@@ -74,12 +72,12 @@ namespace BigTwo
             }
         }
 
-        public Sprite GetCardSprite(int rank, int suite)
+        public Sprite GetCardSprite(int rank, int suit)
         {
             rank = Mathf.Clamp(rank, Constant.CARD_RANK_MIN, Constant.CARD_RANK_MAX);
-            suite = Mathf.Clamp(suite, Constant.CARD_SUITE_MIN, Constant.CARD_SUITE_MAX);
+            suit = Mathf.Clamp(suit, Constant.CARD_SUIT_MIN, Constant.CARD_SUIT_MAX);
 
-            return m_cardRankSuites[suite - 1].CardRankSprites[rank - 1].Sprite;
+            return m_cardRankSuites[suit - 1].CardRankSprites[rank - 1].Sprite;
         }
     }
 }
