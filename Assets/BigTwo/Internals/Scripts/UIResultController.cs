@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -16,6 +17,8 @@ namespace BigTwo
         protected Image m_imageBackground;
         [SerializeField]
         protected RectTransform m_rectLeaderboardsContainer;
+        [SerializeField]
+        protected RectTransform m_rectButtonRetry;
 
         public void Initialize(Player[] players)
         {
@@ -71,6 +74,8 @@ namespace BigTwo
                 UIResultLeaderboard uiLeaderboard = m_uiLeaderboards[i];
                 uiLeaderboard.Show();
             }
+
+            m_rectButtonRetry.DOScale(1f, Constant.ANIMATION_DURATION).From(0f);
         }
     }
 }

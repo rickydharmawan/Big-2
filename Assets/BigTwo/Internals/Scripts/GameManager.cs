@@ -313,5 +313,10 @@ namespace BigTwo
                     break;
             }
         }
+
+        public void RestartGame()
+        {
+            MainManager.Instance.ReloadGameScene();
+        }
     }
 }
