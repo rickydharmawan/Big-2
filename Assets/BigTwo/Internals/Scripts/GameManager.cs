@@ -46,6 +46,9 @@ namespace BigTwo
         [SerializeField]
         protected UIGameController uiGameController;
         [SerializeField]
+        protected UIResultController uiResultController;
+
+        [SerializeField]
         protected ObjectPool m_objectPool;
 
         public int PlayerTurnIndex
@@ -278,12 +281,13 @@ namespace BigTwo
 
         public void GameEnd()
         {
+            uiResultController.Initialize(m_players);
             ChangeGameState(GameState.Result);
         }
 
         public void GameResult()
         {
-
+            uiResultController.Show();
         }
 
         public void OnEventInvoked(EventGameState eventType)
